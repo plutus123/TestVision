@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Bus Testing Tool</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+        h1 { color: #333; }
+        textarea, input[type="file"] { width: 100%; margin-bottom: 10px; }
+        button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        #results { margin-top: 20px; white-space: pre-wrap; }
+        .test-case { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; }
+        .annotated-image { max-width: 100%; margin-top: 10px; }
+        #error { color: red; }
+        #loading { display: none; }
+    </style>
+</head>
+<body>
+    <h1>Red Bus Testing Tool</h1>
+    <textarea id="context" rows="4" placeholder="Optional context (e.g., specific features to focus on)"></textarea><br>
+    <input type="file" id="imageUpload" multiple accept="image/*"><br>
+    <button onclick="generateTestCases()">Describe Testing Instructions</button>
+    <div id="loading">Generating test cases...</div>
+    <div id="error"></div>
+    <div id="results"></div>
+    <div id="annotatedImages"></div>
+
+    <script>
+        async function generateTestCases() {
+            const context = document.getElementById('context').value;
+            const imageFiles = document.getElementById('imageUpload').files;
+            const images = [];
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const results = document.getElementById('results');
+            const annotatedImagesDiv = document.getElementById('annotatedImages');
+
+            loading.style.display = 'block';
+            error.textContent = '';
+            results.innerHTML = '';
+            annotatedImagesDiv.innerHTML = '';
+
+            for (let i = 0; i < imageFiles.length; i++) {
+                const base64Image = await fileToBase64(imageFiles[i]);
+                images.push(base64Image);
+            }
+
+            try {
+                const response = await axios.post('/generate_test_cases', { context, images });
+                const testCases = response.data.test_cases.split('\n\n');
+
+                testCases.forEach((testCase, index) => {
+                    const testCaseDiv = document.createElement('div');
+                    testCaseDiv.className = 'test-case';
+                    testCaseDiv.textContent = testCase;
+                    results.appendChild(testCaseDiv);
+                });
+
+                response.data.annotated_images.forEach((imgBase64, index) => {
+                    const img = document.createElement('img');
+                    img.src = `data:image/png;base64,${imgBase64}`;
+                    img.alt = `Annotated Image ${index + 1}`;
+                    img.className = 'annotated-image';
+                    annotatedImagesDiv.appendChild(img);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                error.textContent = 'Error generating test cases. Please try again.';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = error => reject(error);
+            });
+        }
+    </script>
+</body>
+</html>

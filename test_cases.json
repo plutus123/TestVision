@@ -1,0 +1,20 @@
+{
+    "feature_description": "5:15 \u00a9 -- Sh\nPanchkula Delhi 1Sep\n95 Buses\nFREE DATE Get discount on Upto?\nCHANGE return trip with ne\nMin 50% refund if you _ operat\ncancel Paar\nE Filters = Sort \u00bb Xe PrimoBus =\n\nUse Code FIRST to Get Upto 2250 off on ,b>CTU!\n\nFrom & 404\n\nChandigarh Transport\nUndertaking (12 Buses) >\n\nUse Code FIRST to Get Upto @250 off on HRTC!\n\nHRTC (10 Buses)\nFrom & 270\n\nUse Code FIRST to Get Upto 7250 off on RSRTC!\n\nRSRTC (3 Buses)\nFrom& 320\n\nPrimo\n\n05:30\n4h Om\n\n09:30\n4 Seats\n\nRam Dalal Holidays \u00a39\n\nBharai Benz AfG Si!\n\na \u00ae\n\n= 400\n\nOnwards\n\n09\n. The UI elements are: Detected UI element at (436, 1080) with size (58x28), Detected UI element at (379, 217) with size (59x31), Detected UI element at (387, 184) with size (57x32).",
+    "test_cases": [
+        "1. Verify that upon opening the feature, the UI elements are properly aligned and visible.",
+        "2. Verify the functionality of the filter and sort buttons.",
+        "3. Verify the functionality of the 'Use Code FIRST' for CTU, HRTC, and RSRTC discounts.",
+        "4. Verify the functionality of the 'From & 404', 'From & 270', and 'From& 320' buttons.",
+        "5. Verify the information under 'Chandigarh Transport Undertaking (12 Buses)', 'HRTC (10 Buses)', and 'RSRTC (3 Buses)' is correct and matches the database.",
+        "6. Verify that the 'Free Date Get discount on Upto?' functionality works correctly.",
+        "7. Verify that the 'Min 50% refund if you cancel Paar' functionality works correctly.",
+        "8. Verify that the 'Primo' bus details are displayed correctly.",
+        "9. Verify that the 'Ram Dalal Holidays' details are displayed correctly.",
+        "10. Verify that the 'Bharai Benz AfG Si!' details are displayed correctly.",
+        "11. Verify that the number of buses displayed (95 Buses) is correct and matches the number in the database.",
+        "12. Check the functionality of the '5:15 \u00a9 -- Sh Panchkula Delhi 1Sep' route selection.",
+        "13. Test the feature for responsiveness on different devices and screen sizes.",
+        "14. Verify that the detected UI elements at the respective positions function as expected.",
+        "15. Verify that the '"
+    ]
+}
