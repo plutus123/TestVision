@@ -1,7 +1,5 @@
 import cv2
 import pytesseract
-import os
-import numpy as np
 from dotenv import load_dotenv
 from openai import OpenAI
 import os
